@@ -1,20 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rueda Premium 3D</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #111;
-      color: #fff;
-      text-align: center;
-      padding: 50px;
-    }
-
-```
 .container {
   position: relative;
   width: 300px;
@@ -42,7 +25,7 @@
 
 .label {
   position: absolute;
-  width: 50%;
+  width: 150px;
   left: 50%;
   top: 50%;
   transform-origin: left center;
@@ -51,12 +34,12 @@
   font-size: 14px;
 }
 
-.label:nth-child(1) { transform: rotate(30deg) translateX(-50%) translateY(-120px); }
-.label:nth-child(2) { transform: rotate(90deg) translateX(-50%) translateY(-120px); }
-.label:nth-child(3) { transform: rotate(150deg) translateX(-50%) translateY(-120px); }
-.label:nth-child(4) { transform: rotate(210deg) translateX(-50%) translateY(-120px); }
-.label:nth-child(5) { transform: rotate(270deg) translateX(-50%) translateY(-120px); }
-.label:nth-child(6) { transform: rotate(330deg) translateX(-50%) translateY(-120px); }
+.label:nth-of-type(1) { transform: rotate(30deg) translate(-50%, -140px); }
+.label:nth-of-type(2) { transform: rotate(90deg) translate(-50%, -140px); }
+.label:nth-of-type(3) { transform: rotate(150deg) translate(-50%, -140px); }
+.label:nth-of-type(4) { transform: rotate(210deg) translate(-50%, -140px); }
+.label:nth-of-type(5) { transform: rotate(270deg) translate(-50%, -140px); }
+.label:nth-of-type(6) { transform: rotate(330deg) translate(-50%, -140px); }
 
 .arrow {
   width: 0;
@@ -82,41 +65,3 @@ button {
   margin-top: 20px;
   font-size: 18px;
 }
-```
-
-  </style>
-</head>
-<body>
-
-  <h1>🎰 Rueda Premium</h1>
-  <div class="arrow"></div>
-  <div class="container">
-    <div id="wheel" class="wheel">
-      <div class="label">REGALO</div>
-      <div class="label">CORTESÍA</div>
-      <div class="label">SIGA</div>
-      <div class="label">REGALO</div>
-      <div class="label">CORTESÍA</div>
-      <div class="label">SIGA</div>
-    </div>
-  </div>
-  <button onclick="spin()">Girar</button>
-  <div id="result"></div>
-
-  <script>
-    const prizes = ["REGALO PREMIUM", "CORTESÍA", "SIGA PARTICIPANDO", "REGALO PREMIUM", "CORTESÍA", "SIGA PARTICIPANDO"];
-    let rotation = 0;
-
-    function spin() {
-      const extraDegrees = Math.floor(Math.random() * 360);
-      rotation += 1800 + extraDegrees;
-      document.getElementById("wheel").style.transform = `rotate(${rotation}deg)`;
-      const index = Math.floor(((rotation % 360) / 60)) % 6;
-      setTimeout(() => {
-        document.getElementById("result").textContent = `¡Felicidades! Obtuviste: ${prizes[index]}`;
-      }, 4000);
-    }
-  </script>
-
-</body>
-</html>

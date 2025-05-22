@@ -1,66 +1,37 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rueda Cupones</title>
+  <meta charset="UTF-8" />
+  <title>Test Rueda</title>
   <style>
-    body {
-      background: #ffffff;
-      font-family: sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    .logo {
-      max-width: 150px;
-      margin: 0 auto 20px;
-      display: block;
-    }
-
-    .wheel-container {
-      position: relative;
-      width: 300px;
-      height: 300px;
-      margin: 0 auto;
-    }
-
-    .wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 10px solid #000;
-      box-shadow: 0 0 15px rgba(0,0,0,0.4);
-      background: conic-gradient(
-        #27ae60 0deg 45deg,
-        #27ae60 45deg 90deg,
-        #27ae60 90deg 135deg,
-        #2980b9 135deg 180deg,
-        #2980b9 180deg 225deg,
-        #27ae60 225deg 270deg,
-        #27ae60 270deg 315deg,
-        #27ae60 315deg 360deg
-      );
+    body { background: #fff; text-align: center; font-family: sans-serif; }
+    .wheel { width: 300px; height: 300px; margin: 50px auto; border-radius: 50%;
+      background: conic-gradient(#27ae60 0 135deg, #2980b9 135deg 225deg, #27ae60 225deg 360deg);
       transition: transform 4s ease-out;
+      border: 10px solid black;
     }
-
     .arrow {
-      width: 0;
-      height: 0;
+      width: 0; height: 0;
       border-left: 15px solid transparent;
       border-right: 15px solid transparent;
       border-bottom: 25px solid red;
-      position: absolute;
+      margin: 0 auto;
+      position: relative;
       top: -30px;
-      left: 50%;
-      transform: translateX(-50%);
     }
+  </style>
+</head>
+<body>
+  <div class="arrow"></div>
+  <div id="wheel" class="wheel"></div>
+  <button onclick="spin()">Girar</button>
 
-    .label {
-      position: absolute;
-      width: 80px;
-      left: 50%;
-      top: 50%;
-      transform-origin: left center;
-      fo
+  <script>
+    let deg = 0;
+    function spin() {
+      deg += 3600 + Math.random() * 360;
+      document.getElementById('wheel').style.transform = `rotate(${deg}deg)`;
+    }
+  </script>
+</body>
+</html>

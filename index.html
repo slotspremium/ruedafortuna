@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rueda Premium</title>
+  <title>Rueda Cupones</title>
   <style>
     body {
       background: #ffffff;
@@ -14,119 +13,54 @@
       padding: 20px;
     }
 
-```
-.logo {
-  max-width: 150px;
-  margin: 0 auto;
-  display: block;
-}
+    .logo {
+      max-width: 150px;
+      margin: 0 auto 20px;
+      display: block;
+    }
 
-.wheel-container {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 40px auto;
-}
+    .wheel-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+    }
 
-.wheel {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 10px solid #000;
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
-  background: conic-gradient(
-    #e74c3c 0deg 45deg,
-    #3498db 45deg 90deg,
-    #2ecc71 90deg 135deg,
-    #9b59b6 135deg 180deg,
-    #f39c12 180deg 225deg,
-    #1abc9c 225deg 270deg,
-    #d35400 270deg 315deg,
-    #7f8c8d 315deg 360deg
-  );
-  transition: transform 4s ease-out;
-}
+    .wheel {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 10px solid #000;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      background: conic-gradient(
+        #27ae60 0deg 45deg,
+        #27ae60 45deg 90deg,
+        #27ae60 90deg 135deg,
+        #2980b9 135deg 180deg,
+        #2980b9 180deg 225deg,
+        #27ae60 225deg 270deg,
+        #27ae60 270deg 315deg,
+        #27ae60 315deg 360deg
+      );
+      transition: transform 4s ease-out;
+    }
 
-.arrow {
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 25px solid red;
-  position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-}
+    .arrow {
+      width: 0;
+      height: 0;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 25px solid red;
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
 
-.label {
-  position: absolute;
-  width: 80px;
-  left: 50%;
-  top: 50%;
-  transform-origin: left center;
-  font-size: 11px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-}
-
-.label1 { transform: rotate(22.5deg) translateX(20px); }
-.label2 { transform: rotate(67.5deg) translateX(20px); }
-.label3 { transform: rotate(112.5deg) translateX(20px); }
-.label4 { transform: rotate(157.5deg) translateX(20px); }
-.label5 { transform: rotate(202.5deg) translateX(20px); }
-.label6 { transform: rotate(247.5deg) translateX(20px); }
-.label7 { transform: rotate(292.5deg) translateX(20px); }
-.label8 { transform: rotate(337.5deg) translateX(20px); }
-
-button {
-  padding: 10px 20px;
-  background: #27ae60;
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-#result {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-}
-```
-
-  </style>
-</head>
-<body>
-
-  <img src="logo.png" alt="Slots Premium Logo" class="logo">
-
-  <div class="wheel-container">
-    <div class="arrow"></div>
-    <div id="wheel" class="wheel">
-      <div class="label label1">REGALO PREMIUM</div>
-      <div class="label label2">CORTESÍA</div>
-      <div class="label label3">SIGA PARTICIPANDO</div>
-      <div class="label label4">REGALO PREMIUM</div>
-      <div class="label label5">CORTESÍA</div>
-      <div class="label label6">SIGA PARTICIPANDO</div>
-      <div class="label label7">REGALO PREMIUM</div>
-      <div class="label label8">CORTESÍA</div>
-    </div>
-  </div>
-
-<button onclick="girar()">Girar</button>
-
-  <div id="result"></div>
-
-  <script>
-    const wheel = document.getElementById("wheel");
-    const options = [
-      "REGALO PREMIUM",
-      "CORTESÍA",
-      "SIGA PARTICIPANDO",
-      "REGALO PREMIUM",
-      "CORTESÍA",
+    .label {
+      position: absolute;
+      width: 80px;
+      left: 50%;
+      top: 50%;
+      transform-origin: left center;
+      fo

@@ -2,36 +2,101 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Test Rueda</title>
+  <title>Rueda 7 Premios</title>
   <style>
-    body { background: #fff; text-align: center; font-family: sans-serif; }
-    .wheel { width: 300px; height: 300px; margin: 50px auto; border-radius: 50%;
-      background: conic-gradient(#27ae60 0 135deg, #2980b9 135deg 225deg, #27ae60 225deg 360deg);
-      transition: transform 4s ease-out;
-      border: 10px solid black;
+    body {
+      background: #fff;
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+      padding: 20px;
     }
+
+    .wheel-container {
+      position: relative;
+      width: 320px;
+      margin: 40px auto;
+    }
+
+    .wheel {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      border: 10px solid black;
+      transition: transform 4s ease-out;
+      background: conic-gradient(
+        #f39c12 0deg 51.43deg,
+        #e74c3c 51.43deg 102.86deg,
+        #9b59b6 102.86deg 154.29deg,
+        #2ecc71 154.29deg 205.71deg,
+        #3498db 205.71deg 257.14deg,
+        #1abc9c 257.14deg 308.57deg,
+        #c0392b 308.57deg 360deg
+      );
+    }
+
     .arrow {
-      width: 0; height: 0;
+      width: 0;
+      height: 0;
       border-left: 15px solid transparent;
       border-right: 15px solid transparent;
       border-bottom: 25px solid red;
       margin: 0 auto;
       position: relative;
-      top: -30px;
+      top: -20px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #27ae60;
+      color: white;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
+
   <div class="arrow"></div>
-  <div id="wheel" class="wheel"></div>
+  <div class="wheel-container">
+    <div id="wheel" class="wheel"></div>
+  </div>
+
   <button onclick="spin()">Girar</button>
+  <div id="result"></div>
 
   <script>
+    const wheel = document.getElementById("wheel");
+    const prizes = [
+      "VALE 1 CUPÓN", "VALE 2 CUPONES", "VALE 1 CUPÓN",
+      "VALE 2 CUPONES", "VALE 1 CUPÓN", "VALE 1 CUPÓN", "VALE 1 CUPÓN"
+    ];
+
     let deg = 0;
+
     function spin() {
-      deg += 3600 + Math.random() * 360;
-      document.getElementById('wheel').style.transform = `rotate(${deg}deg)`;
+      const section = 360 / prizes.length;
+      const extraDeg = Math.floor(Math.random() * 360);
+      deg += 3600 + extraDeg;
+      wheel.style.transform = `rotate(${deg}deg)`;
+
+      const normalized = deg % 360;
+      const index = Math.floor((360 - normalized + section / 2) % 360 / section);
+      
+      setTimeout(() => {
+        document.getElementById("result").textContent = "¡Felicidades! Obtuviste: " + prizes[index];
+      }, 4000);
     }
   </script>
+
 </body>
 </html>

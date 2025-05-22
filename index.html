@@ -16,8 +16,9 @@
 
 ```
 .logo {
-  max-width: 280px;
-  margin: 10px auto;
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
 }
 
 .wheel-container {
@@ -129,26 +130,3 @@ button {
       "SIGA PARTICIPANDO",
       "REGALO PREMIUM",
       "CORTESÍA",
-      "SIGA PARTICIPANDO",
-      "REGALO PREMIUM",
-      "CORTESÍA"
-    ];
-    let deg = 0;
-
-    function girar() {
-      const randomDeg = Math.floor(3600 + Math.random() * 720);
-      deg += randomDeg;
-      wheel.style.transform = `rotate(${deg}deg)`;
-
-      const section = 360 / options.length;
-      const normalizedDeg = deg % 360;
-      const index = Math.floor((360 - normalizedDeg + section / 2) % 360 / section);
-
-      setTimeout(() => {
-        document.getElementById("result").textContent = "¡Felicidades! Obtuviste: " + options[index];
-      }, 4000);
-    }
-  </script>
-
-</body>
-</html>

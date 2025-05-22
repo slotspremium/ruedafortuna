@@ -1,118 +1,122 @@
-
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rueda de la Fortuna - Slots Premium</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rueda Premium 3D</title>
   <style>
     body {
       font-family: sans-serif;
+      background: #111;
+      color: #fff;
       text-align: center;
-      background: linear-gradient(to bottom, #fdfbfb, #ebedee);
-      padding: 40px;
+      padding: 50px;
     }
-    .arrow {
-      width: 0;
-      height: 0;
-      border-left: 25px solid transparent;
-      border-right: 25px solid transparent;
-      border-bottom: 35px solid crimson;
-      margin: 0 auto 15px;
-    }
-    #wheel {
-      width: 320px;
-      height: 320px;
-      border-radius: 50%;
-      margin: 0 auto;
-      border: 10px solid #222;
-      background: conic-gradient(
-        #ff7675 0% 16.66%,
-        #ffeaa7 16.66% 33.33%,
-        #55efc4 33.33% 50%,
-        #74b9ff 50% 66.66%,
-        #a29bfe 66.66% 83.33%,
-        #fd79a8 83.33% 100%
-      );
-      box-shadow: 0 10px 25px rgba(0,0,0,0.3), inset 0 0 30px rgba(0,0,0,0.2);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-    }
-    .center {
-      width: 260px;
-      height: 260px;
-      border-radius: 50%;
-      background: white;
-      box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    button {
-      margin-top: 30px;
-      padding: 12px 28px;
-      font-size: 18px;
-      background-color: #00b894;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      cursor: pointer;
-    }
-    #result {
-      margin-top: 25px;
-      font-size: 22px;
-      font-weight: bold;
-      color: #2d3436;
-    }
-    #counter {
-      margin-top: 10px;
-      color: #636e72;
-      font-size: 16px;
-    }
+
+```
+.container {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 8px solid #000;
+  background: conic-gradient(
+    #e74c3c 0deg 60deg,
+    #fff 60deg 120deg,
+    #e74c3c 120deg 180deg,
+    #fff 180deg 240deg,
+    #e74c3c 240deg 300deg,
+    #fff 300deg 360deg
+  );
+  position: relative;
+  transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+  box-shadow: 0 0 20px #e74c3c, inset 0 0 10px #000;
+}
+
+.label {
+  position: absolute;
+  width: 50%;
+  left: 50%;
+  top: 50%;
+  transform-origin: left center;
+  color: #000;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.label:nth-child(1) { transform: rotate(30deg) translateX(-50%) translateY(-120px); }
+.label:nth-child(2) { transform: rotate(90deg) translateX(-50%) translateY(-120px); }
+.label:nth-child(3) { transform: rotate(150deg) translateX(-50%) translateY(-120px); }
+.label:nth-child(4) { transform: rotate(210deg) translateX(-50%) translateY(-120px); }
+.label:nth-child(5) { transform: rotate(270deg) translateX(-50%) translateY(-120px); }
+.label:nth-child(6) { transform: rotate(330deg) translateX(-50%) translateY(-120px); }
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 30px solid #f1c40f;
+  margin: 0 auto;
+}
+
+button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #f39c12;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+}
+```
+
   </style>
 </head>
 <body>
+
+  <h1>🎰 Rueda Premium</h1>
   <div class="arrow"></div>
-  <div id="wheel">
-    <div class="center">¡Gira y ganá!</div>
+  <div class="container">
+    <div id="wheel" class="wheel">
+      <div class="label">REGALO</div>
+      <div class="label">CORTESÍA</div>
+      <div class="label">SIGA</div>
+      <div class="label">REGALO</div>
+      <div class="label">CORTESÍA</div>
+      <div class="label">SIGA</div>
+    </div>
   </div>
   <button onclick="spin()">Girar</button>
   <div id="result"></div>
-  <div id="counter">Giros realizados: <span id="spinCount">0</span></div>
-  <audio id="spinSound" src="https://www.soundjay.com/button/sounds/button-29.mp3" preload="auto"></audio>
+
   <script>
-    const options = [
-      "REGALO PREMIUM",
-      "CORTESÍA",
-      "SIGA PARTICIPANDO",
-      "REGALO PREMIUM",
-      "CORTESÍA",
-      "SIGA PARTICIPANDO"
-    ];
+    const prizes = ["REGALO PREMIUM", "CORTESÍA", "SIGA PARTICIPANDO", "REGALO PREMIUM", "CORTESÍA", "SIGA PARTICIPANDO"];
     let rotation = 0;
-    let count = 0;
+
     function spin() {
-      const spinDegrees = Math.floor(Math.random() * 360) + 1800;
-      const prizeIndex = Math.floor(((spinDegrees % 360) / 60));
-      rotation += spinDegrees;
-      const wheel = document.getElementById('wheel');
-      const result = document.getElementById('result');
-      const spinCount = document.getElementById('spinCount');
-      const sound = document.getElementById('spinSound');
-      wheel.style.transform = `rotate(${rotation}deg)`;
-      result.textContent = '';
-      sound.play();
+      const extraDegrees = Math.floor(Math.random() * 360);
+      rotation += 1800 + extraDegrees;
+      document.getElementById("wheel").style.transform = `rotate(${rotation}deg)`;
+      const index = Math.floor(((rotation % 360) / 60)) % 6;
       setTimeout(() => {
-        result.innerHTML = `<strong>¡Felicidades!</strong> Obtuviste: <strong>${options[prizeIndex]}</strong>`;
-        count++;
-        spinCount.textContent = count;
+        document.getElementById("result").textContent = `¡Felicidades! Obtuviste: ${prizes[index]}`;
       }, 4000);
     }
   </script>
+
 </body>
 </html>

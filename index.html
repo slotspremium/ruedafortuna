@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rueda de la Fortuna - Slots Premium</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: linear-gradient(to bottom, #fdfbfb, #ebedee);
+      padding: 40px;
+    }
+    .arrow {
+      width: 0;
+      height: 0;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 35px solid crimson;
+      margin: 0 auto 15px;
+    }
+    #wheel {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      margin: 0 auto;
+      border: 10px solid #222;
+      background: conic-gradient(
+        #ff7675 0% 16.66%,
+        #ffeaa7 16.66% 33.33%,
+        #55efc4 33.33% 50%,
+        #74b9ff 50% 66.66%,
+        #a29bfe 66.66% 83.33%,
+        #fd79a8 83.33% 100%
+      );
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3), inset 0 0 30px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+    }
+    .center {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+    button {
+      margin-top: 30px;
+      padding: 12px 28px;
+      font-size: 18px;
+      background-color: #00b894;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    #result {
+      margin-top: 25px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #2d3436;
+    }
+    #counter {
+      margin-top: 10px;
+      color: #636e72;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="arrow"></div>
+  <div id="wheel">
+    <div class="center">¡Gira y ganá!</div>
+  </div>
+  <button onclick="spin()">Girar</button>
+  <div id="result"></div>
+  <div id="counter">Giros realizados: <span id="spinCount">0</span></div>
+  <audio id="spinSound" src="https://www.soundjay.com/button/sounds/button-29.mp3" preload="auto"></audio>
+  <script>
+    const options = [
+      "REGALO PREMIUM",
+      "CORTESÍA",
+      "SIGA PARTICIPANDO",
+      "REGALO PREMIUM",
+      "CORTESÍA",
+      "SIGA PARTICIPANDO"
+    ];
+    let rotation = 0;
+    let count = 0;
+    function spin() {
+      const spinDegrees = Math.floor(Math.random() * 360) + 1800;
+      const prizeIndex = Math.floor(((spinDegrees % 360) / 60));
+      rotation += spinDegrees;
+      const wheel = document.getElementById('wheel');
+      const result = document.getElementById('result');
+      const spinCount = document.getElementById('spinCount');
+      const sound = document.getElementById('spinSound');
+      wheel.style.transform = `rotate(${rotation}deg)`;
+      result.textContent = '';
+      sound.play();
+      setTimeout(() => {
+        result.innerHTML = `<strong>¡Felicidades!</strong> Obtuviste: <strong>${options[prizeIndex]}</strong>`;
+        count++;
+        spinCount.textContent = count;
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

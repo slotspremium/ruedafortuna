@@ -101,8 +101,8 @@ button {
   <script>
     const wheel = document.getElementById("wheel");
     const prizes = [
-      "VALE 1 CUPÓN", "VALE 2 CUPONES", "VALE 1 CUPÓN",
-      "VALE 2 CUPONES", "VALE 1 CUPÓN", "VALE 1 CUPÓN", "VALE 1 CUPÓN"
+      "VALE 1 CUPÓN", "VALE 1 CUPÓN", "VALE 1 CUPÓN",
+      "VALE 1 CUPÓN", "VALE 1 CUPÓN", "VALE 2 CUPONES", "VALE 2 CUPONES"
     ];
 
     const colors = [
@@ -111,11 +111,12 @@ button {
     ];
 
     function createSegments() {
+      wheel.innerHTML = ""; // limpiar antes de generar
       prizes.forEach((prize, i) => {
         const angle = 360 / prizes.length;
         const segment = document.createElement("div");
         segment.className = "wheel-segment";
-        segment.style.background = colors[i];
+        segment.style.background = colors[i % colors.length];
         segment.style.transform = `rotate(${i * angle}deg) skewY(${90 - angle}deg)`;
 
         const label = document.createElement("div");

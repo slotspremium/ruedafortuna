@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -12,78 +13,81 @@
       padding: 20px;
     }
 
-    .wheel-container {
-      position: relative;
-      width: 320px;
-      height: 320px;
-      margin: 40px auto;
-    }
+```
+.wheel-container {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 40px auto;
+}
 
-    .wheel {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 10px solid black;
-      transition: transform 4s ease-out;
-      background: conic-gradient(
-        #f39c12 0deg 51.43deg,
-        #e74c3c 51.43deg 102.86deg,
-        #9b59b6 102.86deg 154.29deg,
-        #2ecc71 154.29deg 205.71deg,
-        #3498db 205.71deg 257.14deg,
-        #1abc9c 257.14deg 308.57deg,
-        #c0392b 308.57deg 360deg
-      );
-      position: relative;
-    }
+.wheel {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 10px solid black;
+  transition: transform 4s ease-out;
+  background: conic-gradient(
+    #f39c12 0deg 51.43deg,
+    #e74c3c 51.43deg 102.86deg,
+    #9b59b6 102.86deg 154.29deg,
+    #2ecc71 154.29deg 205.71deg,
+    #3498db 205.71deg 257.14deg,
+    #1abc9c 257.14deg 308.57deg,
+    #c0392b 308.57deg 360deg
+  );
+  position: relative;
+}
 
-    .arrow {
-      width: 0;
-      height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-bottom: 25px solid red;
-      margin: 0 auto;
-      position: relative;
-      top: -20px;
-    }
+.arrow {
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 25px solid red;
+  margin: 0 auto;
+  position: relative;
+  top: -20px;
+}
 
-    .label {
-      position: absolute;
-      width: 90px;
-      left: 50%;
-      top: 50%;
-      transform-origin: left center;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
-      text-shadow: 1px 1px 2px black;
-    }
+.label {
+  position: absolute;
+  width: 90px;
+  left: 50%;
+  top: 50%;
+  transform-origin: left center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 0 0 5px #000, 0 0 10px #000;
+}
 
-    .label1 { transform: rotate(25.71deg) translateX(20px); }
-    .label2 { transform: rotate(77.14deg) translateX(20px); }
-    .label3 { transform: rotate(128.57deg) translateX(20px); }
-    .label4 { transform: rotate(180deg) translateX(20px); }
-    .label5 { transform: rotate(231.43deg) translateX(20px); }
-    .label6 { transform: rotate(282.86deg) translateX(20px); }
-    .label7 { transform: rotate(334.29deg) translateX(20px); }
+.label1 { transform: rotate(25.71deg) translateX(20px); }
+.label2 { transform: rotate(77.14deg) translateX(20px); }
+.label3 { transform: rotate(128.57deg) translateX(20px); }
+.label4 { transform: rotate(180deg) translateX(20px); }
+.label5 { transform: rotate(231.43deg) translateX(20px); }
+.label6 { transform: rotate(282.86deg) translateX(20px); }
+.label7 { transform: rotate(334.29deg) translateX(20px); }
 
-    button {
-      padding: 10px 20px;
-      background-color: #27ae60;
-      color: white;
-      font-size: 18px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-top: 20px;
-    }
+button {
+  padding: 10px 20px;
+  background-color: #27ae60;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
 
-    #result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-    }
+#result {
+  margin-top: 20px;
+  font-size: 18px;
+  font-weight: bold;
+}
+```
+
   </style>
 </head>
 <body>
@@ -101,7 +105,8 @@
     </div>
   </div>
 
-  <button onclick="spin()">Girar</button>
+<button onclick="spin()">Girar</button>
+
   <div id="result"></div>
 
   <script>

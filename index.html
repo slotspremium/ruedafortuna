@@ -1,152 +1,119 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Rueda con Premios Visibles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rueda de la Fortuna</title>
   <style>
     body {
       background: #fff;
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       font-family: sans-serif;
-      margin: 0;
-      padding: 20px;
+      margin-top: 40px;
     }
 
-```
-.wheel-container {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  margin: 40px auto;
-}
+    canvas {
+      border: 4px solid #000;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
 
-.wheel {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 10px solid black;
-  transition: transform 4s ease-out;
-  position: relative;
-}
-
-.wheel-segment {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  left: 50%;
-  top: 50%;
-  transform-origin: 0% 0%;
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-  overflow: hidden;
-}
-
-.label {
-  position: absolute;
-  width: 80px;
-  top: 50%;
-  left: 10px;
-  transform-origin: left center;
-  font-size: 12px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 1px 1px 2px black;
-  text-align: left;
-}
-
-.arrow {
-  width: 0;
-  height: 0;
-  border-left: 15px solid transparent;
-  border-right: 15px solid transparent;
-  border-bottom: 25px solid red;
-  margin: 0 auto;
-  position: relative;
-  top: -20px;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #27ae60;
-  color: white;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-#result {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-}
-```
-
+    #spinBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-
-  <div class="arrow"></div>
-  <div class="wheel-container">
-    <div id="wheel" class="wheel">
-      <!-- Segmentos con colores y textos visibles -->
-    </div>
-  </div>
-
-<button onclick="spin()">Girar</button>
-
-  <div id="result"></div>
+  <canvas id="wheel" width="400" height="400"></canvas>
+  <button id="spinBtn">Girar</button>
+  <h2 id="result"></h2>
 
   <script>
-    const wheel = document.getElementById("wheel");
-    const prizes = [
-      "VALE 1 CUPÓN", "VALE 1 CUPÓN", "VALE 1 CUPÓN",
-      "VALE 1 CUPÓN", "VALE 1 CUPÓN", "VALE 2 CUPONES", "VALE 2 CUPONES"
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+    const radius = canvas.width / 2;
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const spinBtn = document.getElementById("spinBtn");
+    const result = document.getElementById("result");
+
+    const segments = [
+      "VALE 1 CUPÓN", "VALE 2 CUPONES", "VALE 1 CUPÓN",
+      "VALE 3 CUPONES", "VALE 1 CUPÓN", "VALE 2 CUPONES", "VALE 3 CUPONES"
     ];
 
-    const colors = [
-      "#f39c12", "#e74c3c", "#9b59b6",
-      "#2ecc71", "#3498db", "#1abc9c", "#c0392b"
-    ];
+    const colors = ["#FFB6C1", "#87CEFA", "#FFD700", "#90EE90", "#FFA07A", "#9370DB", "#FF6347"];
 
-    function createSegments() {
-      wheel.innerHTML = ""; // limpiar antes de generar
-      prizes.forEach((prize, i) => {
-        const angle = 360 / prizes.length;
-        const segment = document.createElement("div");
-        segment.className = "wheel-segment";
-        segment.style.background = colors[i % colors.length];
-        segment.style.transform = `rotate(${i * angle}deg) skewY(${90 - angle}deg)`;
+    let angle = 0;
+    let spinning = false;
 
-        const label = document.createElement("div");
-        label.className = "label";
-        label.innerText = prize;
-        label.style.transform = `skewY(-${90 - angle}deg)`;
+    function drawWheel() {
+      const arcSize = (2 * Math.PI) / segments.length;
 
-        segment.appendChild(label);
-        wheel.appendChild(segment);
-      });
+      for (let i = 0; i < segments.length; i++) {
+        const startAngle = angle + i * arcSize;
+        const endAngle = startAngle + arcSize;
+
+        // Draw segment
+        ctx.beginPath();
+        ctx.fillStyle = colors[i % colors.length];
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+        ctx.lineTo(centerX, centerY);
+        ctx.fill();
+
+        // Draw text
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(startAngle + arcSize / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 14px sans-serif";
+        ctx.fillText(segments[i], radius - 10, 5);
+        ctx.restore();
+      }
     }
 
-    let deg = 0;
+    function spinWheel() {
+      if (spinning) return;
+      spinning = true;
 
-    function spin() {
-      const section = 360 / prizes.length;
-      const extraDeg = Math.floor(Math.random() * 360);
-      deg += 3600 + extraDeg;
-      wheel.style.transform = `rotate(${deg}deg)`;
+      const duration = 4000;
+      const spins = 5 + Math.random() * 5;
+      const totalRotation = spins * 2 * Math.PI;
+      const finalAngle = totalRotation + Math.random() * 2 * Math.PI;
 
-      const normalized = deg % 360;
-      const index = Math.floor((360 - normalized + section / 2) % 360 / section);
+      const startTime = performance.now();
 
-      setTimeout(() => {
-        document.getElementById("result").textContent = "¡Felicidades! Obtuviste: " + prizes[index];
-      }, 4000);
+      function animate(time) {
+        const elapsed = time - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        angle = finalAngle * easeOutCubic(progress);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawWheel();
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        } else {
+          const selected = segments[Math.floor(((2 * Math.PI - angle % (2 * Math.PI)) / (2 * Math.PI)) * segments.length) % segments.length];
+          result.textContent = "Ganaste: " + selected;
+          spinning = false;
+        }
+      }
+
+      requestAnimationFrame(animate);
     }
 
-    createSegments();
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    drawWheel();
+    spinBtn.addEventListener("click", spinWheel);
   </script>
-
 </body>
 </html>
